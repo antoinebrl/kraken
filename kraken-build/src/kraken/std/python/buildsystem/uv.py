@@ -185,7 +185,7 @@ class UvPyprojectHandler(PyprojectHandler):
         return []
 
 
-class UVPythonBuildSystem(PythonBuildSystem):
+class UvPythonBuildSystem(PythonBuildSystem):
     """
     Implements Python build-system capabilities for [UV].
 
@@ -205,7 +205,7 @@ class UVPythonBuildSystem(PythonBuildSystem):
         return True
 
     def get_managed_environment(self) -> ManagedEnvironment:
-        return UVManagedEnvironment(self.project_directory, self.uv_bin)
+        return UvManagedEnvironment(self.project_directory, self.uv_bin)
 
     def update_lockfile(self, settings: PythonSettings, pyproject: TomlFile) -> TaskStatus:
         indexes = PipIndexes.from_package_indexes(settings.package_indexes.values())
@@ -261,7 +261,7 @@ class UVPythonBuildSystem(PythonBuildSystem):
         return self.project_directory / "uv.lock"
 
 
-class UVManagedEnvironment(ManagedEnvironment):
+class UvManagedEnvironment(ManagedEnvironment):
     def __init__(self, project_directory: Path, uv_bin: str) -> None:
         self.project_directory = project_directory
         self.uv_bin = uv_bin

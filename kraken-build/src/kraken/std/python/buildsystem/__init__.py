@@ -190,6 +190,6 @@ def detect_build_system(project_directory: Path) -> PythonBuildSystem | None:
             project_directory,
         )
 
-    from kraken.std.python.buildsystem.uv import UVPythonBuildSystem
+    from kraken.std.python.buildsystem.uv import UvPythonBuildSystem
 
-    return UVPythonBuildSystem(project_directory)
+    return UvPythonBuildSystem(project_directory)
