@@ -242,6 +242,7 @@ class UvPythonBuildSystem(PythonBuildSystem):
                 "--from",
                 "build>=1.0.0,<2.0.0",
                 "pyproject-build",
+                "-v",
                 "--outdir",
                 tempdir,
                 "--installer",

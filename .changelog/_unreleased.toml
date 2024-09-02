@@ -1,0 +1,5 @@
+[[entries]]
+id = "8ae7fa14-f255-4059-99ea-c52940f72ca9"
+type = "improvement"
+description = "Add -v flag when running `pyproject-build` in `UvPythonBuildSystem`"
+author = "@NiklasRosenstein"
