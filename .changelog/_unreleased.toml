@@ -1,0 +1,5 @@
+[[entries]]
+id = "94e785e3-7eb3-468c-adc7-875d456f4c72"
+type = "fix"
+description = "fix accidental import of dataclass from `attrs` instead of `dataclasses`"
+author = "@NiklasRosenstein"

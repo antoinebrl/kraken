@@ -6,6 +6,7 @@ Support for Python projects managed by [UV](https://docs.astral.sh/uv/guides/pro
 
 from __future__ import annotations
 
+from dataclasses import dataclass
 from hashlib import md5
 import logging
 from os import fsdecode
@@ -17,8 +18,6 @@ from pathlib import Path
 import tempfile
 from typing import TYPE_CHECKING, Annotated, Any, Iterable, MutableMapping, TypeVar
 from urllib.parse import urlparse
-
-from attr import dataclass
 
 from kraken.common.toml import TomlFile
 from kraken.core import TaskStatus
