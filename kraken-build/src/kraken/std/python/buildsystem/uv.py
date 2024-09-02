@@ -127,6 +127,14 @@ class PipIndexes:
         else:
             config["extra-index-url"] = [idx.url for idx in self.supplemental]
 
+    def to_env(self) -> dict[str, str]:
+        env = {}
+        if self.primary is not None:
+            env["UV_INDEX_URL"] = self.primary.unsafe_url
+        if self.supplemental:
+            env["UV_EXTRA_INDEX_URL"] = os.pathsep.join(idx.unsafe_url for idx in self.supplemental)
+        return env
+
 
 class UvPyprojectHandler(PyprojectHandler):
     """Implements the PyprojectHandler interface for UV projects."""
@@ -220,7 +228,7 @@ class UvPythonBuildSystem(PythonBuildSystem):
 
     # TODO: Implement bump_version()
 
-    def build(self, output_directory: Path) -> list[Path]:
+    def build_v2(self, settings: PythonSettings, output_directory: Path) -> list[Path]:
         """
         Uses [build] `>=1.0.0,<2.0.0` to build a distribution of the Python project.
 
@@ -234,6 +242,11 @@ class UvPythonBuildSystem(PythonBuildSystem):
             assert Path(self.uv_bin).name == "uv"
             if shutil.which("uv") != self.uv_bin:
                 env["PATH"] = str(Path(self.uv_bin).parent) + os.pathsep + env["PATH"]
+
+            # We can't pass the --index-url and --extra-index-url options to UV via the pyproject-build CLI,
+            # so we need to use environment variables.
+            indexes = PipIndexes.from_package_indexes(settings.package_indexes.values())
+            env.update(indexes.to_env())
 
             command = [
                 self.uv_bin,
