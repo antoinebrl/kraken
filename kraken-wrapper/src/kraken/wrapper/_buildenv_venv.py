@@ -219,7 +219,11 @@ class VenvBuildEnv(BuildEnv):
         env = os.environ.copy()
         command = self._get_install_command(self._path, requirements, env)
         logger.info("Installing dependencies.")
-        logger.debug("Installing into build environment with %s: %s", self.INSTALLER_NAME, sanitize_http_basic_auth(" ".join(command)))
+        logger.debug(
+            "Installing into build environment with %s: %s",
+            self.INSTALLER_NAME,
+            sanitize_http_basic_auth(" ".join(command)),
+        )
         self._run_command(command, operation_name="Install dependencies", log_file=install_log, env=env)
 
         # Make sure the pythonpath from the requirements is encoded into the enviroment.
