@@ -19,6 +19,7 @@ import tempfile
 from typing import TYPE_CHECKING, Annotated, Any, Iterable, MutableMapping, TypeVar
 from urllib.parse import urlparse
 
+from kraken.common.sanitize import sanitize_http_basic_auth
 from kraken.common.toml import TomlFile
 from kraken.core import TaskStatus
 from kraken.std.python.pyproject import PackageIndex, PyprojectHandler
@@ -236,7 +237,7 @@ class UvPythonBuildSystem(PythonBuildSystem):
         """
 
         with tempfile.TemporaryDirectory() as tempdir:
-            env = os.environ.copy()
+            env: dict[str, str] = {}
 
             # Make sure that UV is on the path for `pyproject-build` to find it.
             assert Path(self.uv_bin).name == "uv"
@@ -261,8 +262,13 @@ class UvPythonBuildSystem(PythonBuildSystem):
                 "--installer",
                 "uv",
             ]
-            sp.check_call(command, cwd=self.project_directory, env=env)
-            logger.info("Running %s in '%s'", command, self.project_directory)
+            logger.info(
+                "Running %s in '%s' with env %s",
+                command,
+                self.project_directory,
+                sanitize_http_basic_auth(str(env)),
+            )
+            sp.check_call(command, cwd=self.project_directory, env={**os.environ, **env})
 
             src_files = list(Path(tempdir).iterdir())
             dst_files = [output_directory / path.name for path in src_files]
