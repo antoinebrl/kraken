@@ -1,5 +1,0 @@
-[[entries]]
-id = "b30f8753-854e-4543-aaa5-3e5ed28a6b38"
-type = "fix"
-description = "Add missing `uv` dependency to `kraken-build` and bump it to `^0.4.2` for kraken-wrapper"
-author = "@NiklasRosenstein"
