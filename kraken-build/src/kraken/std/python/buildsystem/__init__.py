@@ -110,12 +110,16 @@ class PythonBuildSystem(abc.ABC):
             for path, content in revert_files.items():
                 path.write_text(content)
 
-    @abc.abstractmethod
     def build(self, output_directory: Path) -> list[Path]:
         """Build one or more distributions of the project managed by this build system.
 
         :param output_directory: The directory where the distributions should be placed.
         """
+
+        raise NotImplementedError
+
+    def build_v2(self, settings: PythonSettings, output_directory: Path) -> list[Path]:
+        return self.build(output_directory)
 
     @abc.abstractmethod
     def get_pyproject_reader(self, pyproject: TomlFile) -> PyprojectHandler:
