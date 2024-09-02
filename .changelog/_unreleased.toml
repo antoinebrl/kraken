@@ -15,3 +15,12 @@ id = "1811fec4-22e5-45fb-95ae-2d54ee2b4e93"
 type = "hygiene"
 description = "Make use of existing function `inject_url_credentials()` in Kraken-wrapper"
 author = "@NiklasRosenstein"
+
+[[entries]]
+id = "b1b4f8d4-6be0-4fb8-a39a-c9b00c34d03d"
+type = "fix"
+description = "Sanitize command to remove basic auth from URLs when logging install command in kraken-wrapper (fixes #246)"
+author = "@NiklasRosenstein"
+issues = [
+    "https://github.com/kraken-build/kraken/issues/246",
+]

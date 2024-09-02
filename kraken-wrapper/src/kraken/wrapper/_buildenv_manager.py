@@ -5,7 +5,7 @@ import hashlib
 import logging
 import platform
 from pathlib import Path
-from urllib.parse import quote, urlparse, urlunparse
+from urllib.parse import urlparse
 
 from kraken.common import EnvironmentType, RequirementSpec, not_none, safe_rmpath
 from kraken.std.util.url import inject_url_credentials
