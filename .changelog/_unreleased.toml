@@ -9,3 +9,9 @@ id = "b30f8753-854e-4543-aaa5-3e5ed28a6b38"
 type = "fix"
 description = "Add missing `uv` dependency to `kraken-build` and bump it to `^0.4.2` for kraken-wrapper"
 author = "@NiklasRosenstein"
+
+[[entries]]
+id = "1811fec4-22e5-45fb-95ae-2d54ee2b4e93"
+type = "hygiene"
+description = "Make use of existing function `inject_url_credentials()` in Kraken-wrapper"
+author = "@NiklasRosenstein"
